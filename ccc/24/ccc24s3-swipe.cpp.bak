@@ -1,0 +1,86 @@
+#include <algorithm>
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isSame(vector<int>& start, vector<int>& end, int size) {
+	for (int i = 0; i < size; ++i) {
+		if (start[i] != end[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void shiftRight(vector<int>& start, int l, int r) { fill_n(start.at(l), start.at(r), start[l]); }
+
+void shiftLeft(vector<int>& start, int l, int r) { fill_n(start.at(l), start.at(r), start[r]); }
+
+bool move(vector<int>& start, vector<int>& end, vector<string>& action, int size) {
+	// ends
+	if (start[0] != end[0]) {
+		for (int i = 1; i < size; ++i) {
+			if (start[i] == end[0]) {
+				shiftLeft(start, 0, start[i]);
+				break;
+			}
+			return false;
+		}
+	}
+	if (start[size - 1] != end[size - 1]) {
+		for (int i = size - 1; i >= 0; --i) {
+			if (start[i] == end[0]) {
+				shiftRight(start, 0, start[i]);
+				break;
+			}
+			return false;
+		}
+	}
+
+	if (isSame(start, end, size)) {
+		return true;
+	}
+
+	return move(start, end, action, size);
+}
+
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
+	int size;
+	cin >> size;
+	vector<string> actions;
+
+	vector<int> start;
+	for (int i = 0; i < size; ++i) {
+		int temp;
+		cin >> temp;
+		start.push_back(temp);
+	}
+
+	vector<int> end;
+	for (int i = 0; i < size; ++i) {
+		int temp;
+		cin >> temp;
+		end.push_back(temp);
+	}
+
+	if (isSame(start, end, size)) {
+		cout << "YES" << endl;
+		cout << "0" << endl;
+		return 0;
+	}
+
+	if (move(start, end, actions, size)) {
+		cout << "YES" << endl;
+		cout << actions.size() << endl;
+		for (string action : actions) {
+			cout << action << endl;
+		}
+	} else {
+		cout << "NO" << endl;
+	}
+
+	return 0;
+}
