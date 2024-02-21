@@ -18,9 +18,9 @@ void drawVRight() {
 }
 
 void drawVLeft() {
-	cout << "*      " << endl;
-	cout << "*      " << endl;
-	cout << "*      " << endl;
+	cout << "*" << endl;
+	cout << "*" << endl;
+	cout << "*" << endl;
 }
 
 int main() {
@@ -40,9 +40,11 @@ int main() {
 		drawHLine();
 		break;
 	case 1:
+		drawNull();
 		drawVRight();
 		drawNull();
 		drawVRight();
+		drawNull();
 		break;
 	case 2:
 		drawHLine();
@@ -63,6 +65,7 @@ int main() {
 		drawVBoth();
 		drawHLine();
 		drawVRight();
+		drawNull();
 		break;
 	case 5:
 		drawHLine();
@@ -83,6 +86,7 @@ int main() {
 		drawVRight();
 		drawNull();
 		drawVRight();
+		drawNull();
 		break;
 	case 8:
 		drawHLine();
